@@ -28,10 +28,18 @@ int main (){
    tabuleiro[8][7] = 3;
 
     //imprimindo.
+    printf("----- Batalha Naval -----\n");
+    printf("\n");
+
+    //mostrando as colunas.
+    printf("    A B C D E F G H I J\n");
+
     for (int i = 0; i < 10; i++) {
+        printf("%2d ", i); //imprime numero da linha.
         for (int j = 0; j < 10; j++) {
-            printf("%d ", tabuleiro[i][j]);
+            printf(" %d", tabuleiro[i][j]);
         }
         printf("\n");
     }
+    printf("\n");
 }
