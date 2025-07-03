@@ -17,15 +17,15 @@ int main (){
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
     }; 
 
-    //primeiro vetor navio.
-   tabuleiro[5][4] = 3;
-   tabuleiro[5][5] = 3;
-   tabuleiro[5][6] = 3;
+    //primeiro vetor navio vertical.
+   tabuleiro[2][5] = 3;
+   tabuleiro[3][5] = 3;
+   tabuleiro[4][5] = 3;
 
-   //segundo vetor navio.
-   tabuleiro[1][1] = 3;
-   tabuleiro[2][2] = 3;
-   tabuleiro[3][3] = 3;
+   //segundo vetor navio horizontal.
+   tabuleiro[8][9] = 3;
+   tabuleiro[8][8] = 3;
+   tabuleiro[8][7] = 3;
 
     //imprimindo.
     for (int i = 0; i < 10; i++) {
