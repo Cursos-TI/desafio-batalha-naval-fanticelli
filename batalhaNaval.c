@@ -8,10 +8,13 @@
 #define TAM_HABILIDADE 5
 
 //funções.
+
+//para limpar tela.
 void limparTela() {
     system("clear");
 }
 
+//mostra o tabuleiro completo e converte os caracteres.
 void mostrarTabuleiro(int tabuleiro[LINHA][COLUNA]){
     printf("        Batalha Naval \n");
     printf("     A B C D E F G H I J\n");
@@ -24,14 +27,26 @@ void mostrarTabuleiro(int tabuleiro[LINHA][COLUNA]){
 
         for (int j = 0; j < COLUNA; j++) {
             // Imprime o caractere correspondente ao valor.
-            if (tabuleiro[i][j] == 0) {
-                printf(" ~"); //Modifica a aparencia da água. 
-            } else if (tabuleiro[i][j] == 3){
-                printf(" n"); //modifica o navio.
-            } else if (tabuleiro[i][j] == 7){
+            switch (tabuleiro[i][j]){
+            
+            //água
+            case 0: 
+                printf(" ~");
+            break;
+            
+            //navio.
+            case 3:
+                printf(" n");
+            break;
+            
+            //habilidade.
+            case 7:
                 printf(" *");
-            } else {
-                printf(" %d", tabuleiro[i][j]); // Outros valores.
+            break;
+
+            default:
+                printf(" %d", tabuleiro[i][j]);
+            break;
             }
         }
         printf("\n");
@@ -39,6 +54,7 @@ void mostrarTabuleiro(int tabuleiro[LINHA][COLUNA]){
     printf("\n");
 }
 
+// valida as coordenadas escolhidas. 
 void coordenadas(int* escolhaLinha, char* escolhaLetra){
     // Loop para entrada válida.
     while (scanf(" %c%d", escolhaLetra, escolhaLinha) != 2) {
@@ -48,21 +64,22 @@ void coordenadas(int* escolhaLinha, char* escolhaLetra){
     }
 }
 
+//para sobrepor as matrizes de habilidades.
 void aplicarHabilidade(int tabuleiro[LINHA][COLUNA], int habilidade[TAM_HABILIDADE][TAM_HABILIDADE],
 int ondeLinha, int ondeColuna, int origemLinha, int origemColuna){
     for (int i = 0; i < TAM_HABILIDADE; i++){
         for (int j = 0; j < TAM_HABILIDADE; j++){
             if (habilidade[i][j] == 1){
+                //calcula a posição.
                 int linhaTabuleiro = ondeLinha + i - origemLinha;
-
                 int colunaTabuleiro = ondeColuna + j - origemColuna;
 
+                //verificação para validar os limites do tabuleiro.
                 if (linhaTabuleiro >= 0 && linhaTabuleiro < LINHA &&
                 colunaTabuleiro >= 0 && colunaTabuleiro < COLUNA){
-                    if (tabuleiro[linhaTabuleiro][colunaTabuleiro] == 0 ||
-                    tabuleiro[linhaTabuleiro][colunaTabuleiro] == 3){
-                        tabuleiro[linhaTabuleiro][colunaTabuleiro] = 7;
-                    }
+                    
+                    //marca a posição afetada.
+                    tabuleiro[linhaTabuleiro][colunaTabuleiro] = 7;
                 }
                 
             }
@@ -126,12 +143,13 @@ int main (){
         {0, 0, 1, 0, 0}
     };
 
-    //loop para as escolhas.
+    //loop para as escolhas de habilidades.
     while (1){
+        //limpa a tela e escreve o tabuleiro.
         limparTela();
         mostrarTabuleiro(tabuleiro);
 
-        //menu.
+        //menu de habilidades.
         printf(" Escolha qual habilidade usar:\n");
         printf(" 1. Cone\n");
         printf(" 2. Cruz\n");
